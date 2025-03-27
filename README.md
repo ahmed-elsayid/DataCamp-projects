@@ -10,12 +10,22 @@ This repository is a collection of machine learning projects completed through [
 ## Projects
 This collection includes the following machine learning projects:
 
-1. **[1. **[Predicting Credit Card Approvals]**  ]**  
+- 1  **[Predicting Credit Card Approvals]**  
    - **Source**: [e.g., "DataCamp - Machine Learning with Python"]  
    - **Description**: [e.g., "Build a machine learning model to predict if a credit card application will get approved."]  
    - **Technologies**: [e.g., "Python, pandas, scikit-learn"]  
    - **Key Skills**: [e.g., "Feature engineering, hyperparameter tuning"]  
-   - **Location**: `projects/project1/Project1.ipynb`
+   - **Location**: `project1_Predicting Credit Card Approvals/notebook.ipynb`
+
+
+
+- 2 **[Predicting Movie Rental Durations]**  
+   - **Source**: [e.g., "DataCamp - Machine Learning with Python"]  
+   - **Description**: [e.g., "Build a regression model for a DVD rental firm to predict rental duration. Evaluate models to recommend the best one."]  
+   - **Technologies**: [e.g., "Python, pandas, scikit-learn"]  
+   - **Key Skills**: [e.g., "Feature engineering, hyperparameter tuning"]  
+   - **Location**: `project2_Predicting Movie Rental Durations/notebook.ipynb`
+
 
 
 
