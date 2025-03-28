@@ -27,6 +27,18 @@ This collection includes the following machine learning projects:
    - **Location**: `project2_Predicting Movie Rental Durations/notebook.ipynb`
 
 
+-3 **[What Makes a Good Book?]**  
+   - **Source**: [e.g., "DataCamp - Machine Learning with Python"]  
+   - **Description**: [e.g., "Generate features from text and numeric variables to predict the popularity of books."]  
+   - **Technologies**: [e.g., "Python, pandas, scikit-learn"]  
+   - **Key Skills**: [e.g., "Feature engineering, hyperparameter tuning"]  
+   - **Location**: `project3_Predicting Customer Churn/notebook.ipynb`
+
+
+
+
+
+
 
 
 *More projects will be added as the collection grows. See the `projects/` directory for all available notebooks.*
