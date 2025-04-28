@@ -34,6 +34,20 @@ This collection includes the following machine learning projects:
    - **Key Skills**: [e.g., "Feature engineering, hyperparameter tuning"]  
    - **Location**: `project3_Predicting Customer Churn/notebook.ipynb`
 
+ -4 **[Exploring NYC Public School Test Results]**  
+   - **Source**: [e.g., "DataCamp - Data Analysis with Python"]  
+   - **Description**: [e.g., "Analyze SAT performance of NYC public schools to identify trends and factors affecting test scores."]  
+   - **Technologies**: [e.g., "Python, pandas, matplotlib"]  
+   - **Key Skills**: [e.g., "Exploratory data analysis, data visualization"]  
+   - **Location**: `project4_Exploring NYC Public School/notebook.ipynb`
+
+
+-5 **[Exploring Airbnb Market Trends]**
+   - **Source**: [e.g., "DataCamp - Data Analysis with Python"]  
+   - **Description**: [e.g., "Analyze Airbnb listings in NYC to identify trends and factors affecting rental prices."]  
+   - **Technologies**: [e.g., "Python, pandas, matplotlib"]  
+   - **Key Skills**: [e.g., "Exploratory data analysis, data visualization"]  
+   - **Location**: `project5_Exploring Airbnb Market Trends/notebook.ipynb`
 
 
 

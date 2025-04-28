@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملخصات محاضرات Mobile Computing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --primary-color: #007bff; /* Bootstrap Blue */
+    --secondary-color: #6c757d; /* Gray */
+    --light-bg: #f8f9fa; /* Light Gray */
+    --dark-text: #343a40; /* Dark Gray */
+    --light-text: #ffffff;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --code-bg: #e9ecef;
+    --code-text: #c7254e; /* Pinkish */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --font-family: 'Cairo', sans-serif; /* Arabic font */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.7;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    direction: rtl; /* Right-to-left for Arabic */
+}
+
+/* --- Header & Navigation --- */
+header {
+    background: linear-gradient(90deg, var(--primary-color), #0056b3);
+    color: var(--light-text);
+    padding: 2rem 1rem 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center;
+    gap: 10px; /* Space between items */
+}
+
+header nav ul li {
+    margin: 5px;
+}
+
+header nav ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 400;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header nav ul li a:hover,
+header nav ul li a:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* --- Main Container --- */
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* --- Lecture Card Styling --- */
+.lecture-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Initially hidden for fade-in */
+    transform: translateY(20px); /* Start slightly lower */
+    border-left: 5px solid var(--primary-color); /* Accent border */
+}
+
+/* Add animation */
+.lecture-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.lecture-card:hover {
+   /* transform: translateY(-5px); */ /* Optional hover effect */
+   /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); */
+}
+
+.lecture-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    font-size: 1.8rem;
+}
+
+.lecture-card .content {
+    padding-right: 10px; /* Indent content slightly */
+}
+
+.lecture-card p {
+    margin-bottom: 1rem;
+}
+
+.lecture-card ul,
+.lecture-card ol {
+    margin-bottom: 1rem;
+    padding-right: 20px; /* Standard Arabic list indent */
+}
+
+.lecture-card ul ul,
+.lecture-card ol ol,
+.lecture-card ul ol,
+.lecture-card ol ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.lecture-card li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Code Styling --- */
+code {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 0.2em 0.4em;
+    margin: 0 0.2em;
+    font-size: 0.9em;
+    border-radius: 4px;
+    font-family: monospace; /* Monospace for code */
+    direction: ltr; /* Ensure English terms are Left-to-Right */
+    display: inline-block; /* Helps with direction */
+    white-space: nowrap; /* Prevent wrapping inside code */
+}
+
+strong, b {
+    font-weight: 700;
+    color: var(--primary-color); /* Make emphasized text stand out */
+}
+
+/* --- Exam Questions Section --- */
+.exam-questions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.exam-questions h3 {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.exam-questions ol {
+    padding-right: 20px;
+}
+
+.exam-questions li {
+    margin-bottom: 0.7rem;
+    font-size: 0.95rem;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--dark-text);
+    color: var(--light-bg);
+    font-size: 0.9rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header nav ul li a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .lecture-card {
+        padding: 1.5rem;
+    }
+
+    .lecture-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .exam-questions h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+     header h1 {
+        font-size: 1.5rem;
+    }
+
+    header nav ul {
+        gap: 5px; /* Reduce gap further */
+    }
+
+     header nav ul li a {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+     .lecture-card {
+        padding: 1rem;
+    }
+      .lecture-card h2 {
+        font-size: 1.3rem;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ملخصات شاملة لمادة Mobile Computing (بالعامية المصرية)</h1>
+        <nav>
+            <ul>
+                <li><a href="#lecture1">المحاضرة 1: Mobile Computing</a></li>
+                <li><a href="#lecture2">محاضرة GSM (جزء 1)</a></li>
+                <li><a href="#lecture3">محاضرة GSM (جزء 2)</a></li>
+                <li><a href="#lecture4">محاضرة GSM (جزء 3)</a></li>
+                <li><a href="#lecture5">محاضرة GPRS</a></li>
+                <li><a href="#lecture6">محاضرة Signaling</a></li>
+                <li><a href="#lecture7">محاضرة Wireless LAN (جزء 1)</a></li>
+                <li><a href="#lecture8">محاضرة Wireless LAN (جزء 2)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- المحاضرة الأولى -->
+        <section id="lecture1" class="lecture-card">
+            <h2>المحاضرة الأولى: Mobile Computing (Dr. Hany El-Ghaish) - مقدمة عامة</h2>
+            <div class="content">
+                <p>المحاضرة دي بتقدم كورس الـ <code>Mobile Computing</code>.</p>
+                <ul>
+                    <li><strong>أهداف الكورس (<code>Course Goals</code>):</strong>
+                        <ul>
+                            <li>نتعلم المفاهيم الأساسية للـ <code>mobile/wireless</code>.</li>
+                            <li>نتعرف على مفاهيم مرتبطة زي <code>sensor networks</code>, <code>embedded computing</code>, <code>wearables</code>, <code>pervasive computing</code>.</li>
+                            <li>نفهم استراتيجيات تطوير الموبايل (مش برمجة، لأ مفاهيم).</li>
+                            <li>نطبق المهارات دي عملي.</li>
+                        </ul>
+                    </li>
+                    <li><strong>الدرجات (<code>Grading</code>):</strong> متوزعة على امتحان نص الترم (<code>Midterm</code>)، امتحان آخر الترم (<code>Final</code>)، تقارير المشروع (<code>Project Documents</code>)، عرض المشروع (<code>Project Presentation</code>)، والمشاركة في المحاضرات (<code>Class Participation</code>).</li>
+                    <li><strong>مشروع الكورس (<code>Course Project</code>):</strong>
+                        <ul>
+                            <li>مشروع تطوير هياخد الترم كله في مجال واسع من الـ <code>mobile computing</code>.</li>
+                            <li>فرق بحد أقصى طالبين.</li>
+                            <li>ممكن تتعاونوا بين الفرق.</li>
+                            <li>هتستخدموا <code>Platforms/devices</code> من اختياركم (سوفتوير زي <code>Android</code>, <code>iOS</code>, <code>Windows</code>, <code>Arduino</code>, <code>Raspberry Pi</code>... وهاردوير زي <code>Smartphones</code>, <code>tablets</code>, <code>Embedded devices</code>, <code>Sensor devices</code>, <code>Wearables</code>, <code>Robots</code>, <code>UAVs</code>...).</li>
+                        </ul>
+                    </li>
+                    <li><strong>إيه هو الـ <code>Mobile Computing</code>؟</strong>
+                        <ul>
+                            <li><strong><code>Computing</code>:</strong> ببساطة تشغيل الكمبيوتر (زي ما قاموس أوكسفورد بيقول).</li>
+                            <li><strong><code>Mobile</code>:</strong> حاجة أو حد يقدر يتحرك أو ننقله بسهولة وسرعة.</li>
+                            <li><strong><code>Mobile Computing</code>:</strong> إن المستخدمين معاهم أجهزة كمبيوتر محمولة (<code>portable computers</code>) ويفضلوا متوصلين بالشبكة (<code>network connections</code>) حتى وهم بيتحركوا.</li>
+                        </ul>
+                    </li>
+                    <li><strong>تعريفات تانية:</strong> استخدام الكمبيوتر وأنت بتتحرك، نقل عملية شغل من مكان ثابت لمكان ديناميكي أكتر، إنك تعمل شغلك في مكان مكنتش تقدر تعمله فيه قبل كده، مصطلح شامل (<code>umbrella term</code>) بيوصف التكنولوجيا اللي بتخلي الناس توصل للخدمات في أي مكان (<code>anyplace</code>)، في أي وقت (<code>anytime</code>)، ومن أي حتة (<code>anywhere</code>).</li>
+                    <li><strong>أسماء تانية ومفاهيم متداخلة:</strong> <code>Pervasive Computing</code>, <code>Ubiquitous Computing</code>, <code>Wireless Computing</code>, <code>Embedded Computing</code>, <code>Nomadic Computing</code>, <code>Wireless Sensor Networks</code>, <code>Ad-Hoc Networks</code>, <code>Mesh Networks</code>, <code>Vehicular Networks</code>...</li>
+                    <li><strong>المكونات الرئيسية:</strong> <code>Mobile hardware</code> (الأجهزة نفسها)، <code>Mobile software</code> (البرامج)، <code>Mobile communication</code> (الاتصالات).</li>
+                    <li><strong>مقارنة بين <code>Wired</code> و <code>Wireless</code>:</strong>
+                        <ul>
+                            <li><strong><code>Wired</code> (بالسلك):</strong> <code>high bandwidth</code> (سرعة عالية وثابتة)، صعب تتجسس عليه لازم توصل للسلك، الأجهزة غالبًا قوية ومش بتعتمد على بطارية، التأخير قليل (<code>low delay</code>)، الاتصال مستمر.</li>
+                            <li><strong><code>Wireless</code> (لاسلكي):</strong> <code>low bandwidth</code> (سرعة أقل وممكن تتغير كتير)، مشكلة الـ <code>hidden terminal</code> (هنشوفها بعدين)، الأجهزة غالبًا أضعف وبتعتمد على بطارية، لازم تكون قريب من المصدر، التأخير أعلى (<code>higher delay</code>)، ممكن الاتصال يقطع (<code>disconnected operation</code>).</li>
+                        </ul>
+                    </li>
+                    <li><strong>أنواع الأجهزة اللاسلكية:</strong> <code>Laptops</code>, <code>Palmtops</code>, <code>PDAs</code>, <code>Cell phones</code>, <code>Smart phones</code>, <code>Pagers</code>, <code>Sensors</code>.</li>
+                    <li><strong>ليه الـ <code>Mobile Computing</code> مهم (<code>Why Go Mobile</code>)؟</strong> بيخليك متصل في أي وقت وأي مكان، بيوصل الاتصالات لأماكن مفيهاش بنية تحتية، بيسمح بالحركة (<code>mobility</code>)، بيفتح الباب لتطبيقات جديدة (<code>new applications</code>)، مجال بحثي شيق وجديد.</li>
+                    <li><strong>تطور الـ <code>Mobile Computing</code> (سبع موجات - <code>Seven Waves</code>):</strong>
+                        <ol>
+                            <li><code>Portability</code> (قابلية النقل): تصغير الهاردوير.</li>
+                            <li><code>Miniaturization</code> (التصغير): أجهزة أصغر تستخدمها وانت ماشي.</li>
+                            <li><code>Connectivity</code> (الاتصال): تطوير أجهزة وتطبيقات للاتصال اللاسلكي.</li>
+                            <li><code>Convergence</code> (الدمج): دمج أجهزة مختلفة في جهاز واحد (السمارت فون).</li>
+                            <li><code>Divergence</code> (التخصص): أجهزة متخصصة لوظيفة معينة.</li>
+                            <li><code>Applications (Apps)</code> (التطبيقات): موجة تطوير المحتوى والتطبيقات للموبايل.</li>
+                            <li><code>Digital Ecosystems</code> (الأنظمة البيئية الرقمية): تكامل الموبايل مع تكنولوجيات تانية.</li>
+                        </ol>
+                    </li>
+                     <li><strong>مثال: السمارت فون (<code>Smartphone</code>):</strong> يجمع كل الموجات تقريبًا.</li>
+                    <li><strong>قيود وتحديات (<code>Constraints and Challenges</code>):</strong> حجم أصغر، قيود مساحة ووزن، تؤدي لقيود تانية:
+                        <ul>
+                            <li><strong><code>Resource Poor</code> (فقر الموارد):</strong> CPU, RAM, Storage محدودة. حلول: التعرف على الصوت/الكتابة، <code>cloud storage</code>، <code>cloud computing</code>.</li>
+                            <li><strong><code>Less Secured/Reliable</code> (أمان وموثوقية أقل):</strong> حماية البيانات مهمة (<code>authentication</code>). الأمان أصعب (شبكات لاسلكية، موارد عامة). مصادر خطر (SMS, Wi-Fi, ثغرات). حلول: تشفير (<code>WEP</code>, <code>WPA/WPA2</code>)، <code>VPN</code>/<code>HTTPS</code>، فلترة <code>MAC addresses</code>.</li>
+                            <li><strong><code>Intermittent Connectivity</code> (اتصال متقطع):</strong> الجهاز ممكن يبعد عن الشبكة. حلول: تخزين مؤقت (<code>buffered</code>).</li>
+                            <li><strong><code>Energy Constrained</code> (قيود الطاقة):</strong> البطارية المصدر الأساسي. المكونات بتستهلك طاقة (sensors, storage, communication). حلول: إدارة الطاقة (<code>Power management</code>)، تصميم ذكي (<code>low power states</code>, <code>energy-aware OS/apps</code>)، التركيز على تجربة المستخدم (<code>User experience</code>).</li>
+                        </ul>
+                    </li>
+                    <li><strong>اتجاهات السوق (<code>Trends</code>):</strong> نمو مشتركين الموبايل، التسوق عبر الموبايل، متاجر التطبيقات، <code>Wearables</code>، استخدام الموبايل في <code>Healthcare</code>، تنوع <code>Apps</code>، سيطرة أندرويد.</li>
+                    <li><strong>وظائف مطوري الموبايل (<code>Mobile Developer Jobs</code>):</strong> مجال مطلوب ومرتباته كويسة.</li>
+                </ul>
+                <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بالمحاضرة الأولى:</h3>
+                    <ol>
+                        <li>In your own words, explain the meaning of <code>mobile computing</code>. (اشرح بأسلوبك معنى الحوسبة المتنقلة).</li>
+                        <li>What are the main functions of <code>mobile computing</code>? (إيه هي الوظائف الأساسية للحوسبة المتنقلة؟ - ممكن نجاوب من "<code>Why Go Mobile</code>?")</li>
+                        <li>What is the difference between <code>wireless</code> and <code>mobility</code>? (إيه الفرق بين اللاسلكي والحركية؟)</li>
+                        <li>What is the difference between <code>infrastructure mode</code> and <code>ad-hoc mode</code> in wireless networks? (إيه الفرق بين وضع البنية التحتية ووضع الأد-هوك في الشبكات اللاسلكية؟)</li>
+                        <li>What is the meaning of <code>multipath fading</code>? How can we solve this problem? (إيه معنى خفوت المسارات المتعددة؟ وإزاي ممكن نحل المشكلة دي؟)</li>
+                        <li>What are the differences among the used techniques (<code>FDM</code>, <code>TDM</code>, <code>FDMA</code>, <code>TDMA</code>, <code>CDMA</code>) in wireless communication? (إيه الفروقات بين التقنيات المستخدمة؟)</li>
+                        <li>What is the meaning of a <code>mobile sensors</code>? Differentiate between <code>hardware-based sensors</code> and <code>software-based sensors</code>? (إيه معنى حساسات الموبايل؟ وفرق بين أنواعها؟)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة GSM - جزء 1 -->
+        <section id="lecture2" class="lecture-card">
+            <h2>محاضرة GSM (الجزء الأول: مقدمة وتاريخ وأنظمة) (Dr. Hany El-Ghaish)</h2>
+             <div class="content">
+                <p>المحاضرة دي بتركز على نظام <code>GSM</code> (<code>Global System for Mobile Communication</code>).</p>
+                <ul>
+                    <li><strong>تاريخ الاتصالات:</strong> أساسيات (<code>Source</code>, <code>Destination</code>, <code>Transmission Medium</code>). وسيط سلكي (<code>Wired</code>) ولاسلكي (<code>Wireless</code>). التطور من دخان للتلغراف للتليفون (<code>PSTN</code>). مقارنة سلكي ولاسلكي (<code>Mobility</code> مقابل <code>Losses</code>, <code>Security</code>, <code>Bandwidth</code>).</li>
+                    <li><strong>أساسيات النظام الخلوي (<code>Cellular System Fundamentals</code>):</strong>
+                        <ul>
+                            <li>ليه التحول من <code>Analog</code> لـ <code>Digital</code>؟ <code>Capacity</code>, <code>Compatibility</code>, <code>Cost</code>, <code>Quality</code>, <code>Security</code>.</li>
+                            <li>تقنيات مستخدمة: <code>FDM</code>, <code>TDM</code>, <code>FDMA</code> (تقسيم تردد)، <code>TDMA</code> (تقسيم وقت). <code>GSM</code> بيستخدم <code>TDMA/FDMA</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>أنواع التليفونات:</strong> ثابت (<code>PSTN</code>)، لاسلكي (بـ base)، وموبايل (<code>Mobile</code>).</li>
+                    <li><strong>أوضاع الإرسال (<code>Modes of Transmission</code>):</strong> <code>Simplex</code> (اتجاه واحد), <code>Half-Duplex</code> (اتجاهين مش مع بعض), <code>Full-Duplex</code> (اتجاهين مع بعض - زي GSM).</li>
+                    <li><strong>مشاكل الأنظمة القديمة (قبل الخلوية):</strong> محطة قوية واحدة، جهاز تقيل وغالي، مفيش <code>switching</code>، جودة قليلة، <code>limited capacity</code>، استهلاك طاقة عالي، مستوى طاقة غير آمن.</li>
+                    <li><strong>الأجيال الخلوية (<code>Cellular Generations</code>):</strong>
+                        <ul>
+                            <li><strong>1G:</strong> <code>Analog</code>, <code>FDMA</code>, صوت بس, مفيش تشفير. أمثلة: <code>AMPS</code>, <code>NMT</code>, <code>TACS</code>.</li>
+                            <li><strong>2G:</strong> <code>Digital</code>, <code>GSM</code> هو الأشهر, <code>TDMA</code>, <code>pan-national roaming</code>, تشفير, صوت + بيانات, استهلاك طاقة أقل, سعة ضخمة.</li>
+                            <li><strong>3G:</strong> <code>Multimedia services</code>, <code>W-CDMA</code>, <code>Large Bandwidth</code>, <code>Higher Bit Rate</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>الهيكل الخلوي (<code>Cellular Structure</code>):</strong>
+                        <ul>
+                            <li>تقسيم المنطقة لـ <code>cells</code> صغيرة وتجميعها في <code>clusters</code>.</li>
+                            <li>المزايا: استهلاك طاقة أقل، إعادة استخدام الترددات (<code>frequency reuse</code>).</li>
+                            <li>شكل الخلية (<code>Cell Shape</code>): سداسي (<code>hexagon</code>) نظريًا.</li>
+                            <li>تقسيم الخلية لقطاعات (<code>Cell Sectorization</code>): تقسيم تغطية الهوائي لقطاعات لتقليل التداخل وزيادة السعة.</li>
+                            <li>التحكم في الطاقة التكيفي (<code>Adaptive Power Control</code>): الموبايل يغير قوة إرساله حسب بعده عن الـ <code>Base Station (BS)</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>أنواع الخلايا (<code>Cell Types</code>):</strong> <code>Macrocell</code> (كبيرة), <code>Microcell</code> (متوسطة), <code>Picocell</code> (صغيرة جدًا).</li>
+                    <li><strong>تقسيم الخلايا (<code>Cell Splitting</code>):</strong> تقسيم الخلية الكبيرة لخلايا أصغر عند زيادة الحمل لزيادة السعة (<code>capacity</code>).</li>
+                    <li><strong>تقنيات تخصيص القنوات (<code>Channel Allocation</code>):</strong> <code>Fixed</code> (ثابتة), <code>Dynamic</code> (حسب الحاجة), <code>Hybrid</code> (خليط).</li>
+                    <li><strong>خصائص القناة (<code>Channel Characteristics</code>):</strong>
+                        <ul>
+                            <li><strong><code>Multipath Fading</code> (خفوت المسارات المتعددة):</strong> الإشارة توصل من كذا مسار وتتداخل. حلول: <code>Microscopic Diversity</code> (Time, Frequency, Space), <code>Combining Techniques</code>, <code>Frequency Hopping</code>, <code>Error Correction</code>, <code>Interleaving</code>, <code>Adaptive Power Control</code>.</li>
+                            <li><strong><code>Shadow Fading</code> (خفوت الظل):</strong> بسبب عائق كبير. حل: <code>Macroscopic Diversity</code> (اختيار BS تانية).</li>
+                            <li><strong><code>Doppler Shift</code> (إزاحة دوبلر):</strong> تغير التردد بسبب الحركة.</li>
+                            <li><strong><code>Interference</code> (التداخل):</strong> <code>Co-channel</code> (نفس التردد), <code>Adjacent channel</code> (تردد قريب).</li>
+                            <li><strong><code>Delay Spread</code> (<code>Time dispersion</code>):</strong> وصول الإشارة بأوقات مختلفة. حل: <code>delay equalizer</code>.</li>
+                            <li><strong><code>Time Alignment Problem</code>:</strong> وصول إشارات الموبايلات بأوقات غلط. حل: الـ BS يعمل <code>timing adjustments</code>.</li>
+                            <li><strong><code>Path Loss</code>:</strong> ضعف الإشارة مع المسافة.</li>
+                            <li><strong><code>Combined Signal Loss</code>:</strong> مجموع كل أنواع الخسارة.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بهذا الجزء:</h3>
+                     <ol>
+                        <li>What is the meaning of <code>multipath fading</code>? How can we solve this problem? (إيه معنى خفوت المسارات المتعددة؟ وإزاي ممكن نحل المشكلة دي؟)</li>
+                        <li>What are the differences among the used techniques (<code>FDM</code>, <code>TDM</code>, <code>FDMA</code>, <code>TDMA</code>, <code>CDMA</code>) in wireless communication? (إيه الفروقات بين التقنيات المستخدمة؟)</li>
+                        <li>Define the process of <code>cell sectorization</code> then state the differences between <code>cell sectorization</code> and <code>cell splitting</code>. (عرف تقسيم الخلية لقطاعات وقول الفرق بينها وبين تقسيم الخلايا).</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة GSM - جزء 2 -->
+        <section id="lecture3" class="lecture-card">
+            <h2>محاضرة GSM (الجزء الثاني: هيكل شبكة GSM) (Dr. Hany El-Ghaish)</h2>
+             <div class="content">
+                <p>الجزء ده بيكمل شرح نظام <code>GSM</code> وبيركز على مكونات الشبكة (<code>Network Architecture</code>).</p>
+                <ul>
+                    <li><strong>مكونات شبكة GSM الرئيسية:</strong>
+                        <ol>
+                            <li><strong><code>Mobile Station (MS)</code>:</strong> جهاز الموبايل نفسه.</li>
+                            <li><strong><code>Base Station Subsystem (BSS)</code>:</strong> نظام المحطة القاعدية (الأبراج وما حولها).</li>
+                            <li><strong><code>Switching Subsystem (SSS / NSS)</code>:</strong> نظام التحويل (السنترالات وقواعد البيانات).</li>
+                            <li><strong><code>Operation and Maintenance Subsystem (OMS / OSS)</code>:</strong> نظام التشغيل والصيانة.</li>
+                        </ol>
+                    </li>
+                    <li><strong>1. <code>Mobile Station (MS)</code>:</strong>
+                        <ul>
+                            <li>أوضاع: <code>Attached</code> (<code>Idle</code> أو <code>Active</code>) أو <code>Detached</code> (<code>IMSI detach</code> أو <code>Implicit detach</code>).</li>
+                            <li>أنواع: <code>Vehicle mounted</code>, <code>Transportable</code>, <code>Handheld</code>.</li>
+                            <li>مكونات:
+                                <ul>
+                                    <li><strong><code>Mobile Equipment (ME)</code>:</strong> الجهاز (الهاردوير)، ليه رقم <code>IMEI</code>.</li>
+                                    <li><strong><code>Subscriber Identity Module (SIM)</code>:</strong> الشريحة، بتخزن معلومات المشترك والأمان، فيها رقم <code>IMSI</code> ومفتاح <code>Ki</code>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                     <li><strong>أرقام الهوية في GSM (<code>Identity Numbers</code>):</strong>
+                        <ul>
+                            <li><strong><code>IMEI</code>:</strong> رقم الجهاز (15 رقم).</li>
+                            <li><strong><code>MSISDN</code>:</strong> رقم التليفون (اللي الناس بتطلبه).</li>
+                            <li><strong><code>IMSI</code>:</strong> رقم الشريحة السري (15 رقم).</li>
+                            <li><strong><code>MSRN</code>:</strong> رقم مؤقت لتوجيه المكالمة في الـ <code>roaming</code>.</li>
+                            <li><strong><code>TMSI</code>:</strong> رقم مؤقت لإخفاء الـ <code>IMSI</code> على الهوا.</li>
+                        </ul>
+                    </li>
+                    <li><strong>2. <code>Base Station Subsystem (BSS)</code>:</strong>
+                        <ul>
+                            <li><strong><code>BTS (Base Transceiver Station)</code>:</strong> البرج ومعدات الإرسال والاستقبال (<code>RF equipment</code>). ليه رقم <code>CGI</code>. بيعمل <code>channel coding</code>, <code>ciphering</code>, <code>modulation</code>.</li>
+                            <li><strong><code>BSC (Base Station Controller)</code>:</strong> المتحكم في مجموعة <code>BTS</code>. بيعمل <code>Paging</code>, <code>Channel allocation</code>, <code>Dynamic power control</code>, <code>Handover</code>, <code>Frequency hopping</code>.</li>
+                             <li><strong><code>TRAU (Transcoding and Rate Adaptation Unit)</code>:</strong> وحدة ضغط الصوت (<code>speech compression</code>) ومواءمة معدل البيانات بين <code>BSC</code> و <code>MSC</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>3. <code>Switching Subsystem (SSS / NSS)</code>:</strong>
+                        <ul>
+                            <li><strong><code>MSC (Mobile Switching Center)</code>:</strong> سنترال الموبايل، بيعمل <code>switching</code> و <code>call routing</code>.</li>
+                            <li><strong><code>HLR (Home Location Register)</code>:</strong> قاعدة بيانات رئيسية ودائمة لكل المشتركين (<code>IMSI</code>, <code>MSISDN</code>, Services, <code>VLR address</code>).</li>
+                            <li><strong><code>VLR (Visitor Location Register)</code>:</strong> قاعدة بيانات مؤقتة مع كل <code>MSC</code> للموبايلات الموجودة في منطقته (<code>Mobile status</code>, <code>TMSI</code>, <code>MSRN</code>, <code>Location Area</code>).</li>
+                            <li><strong><code>AUC (Authentication Center)</code>:</strong> مركز التوثيق، بيولد الـ <code>Triplet</code> (<code>RAND</code>, <code>SRES</code>, <code>Kc</code>) باستخدام <code>Ki</code> و خوارزميات <code>A3</code>/<code>A8</code>.</li>
+                            <li><strong><code>EIR (Equipment Identity Register)</code>:</strong> قاعدة بيانات للـ <code>IMEI</code> (<code>White/Black/Gray list</code>) لمنع الأجهزة المسروقة.</li>
+                        </ul>
+                    </li>
+                     <li><strong>4. <code>Operation and Maintenance Subsystem (OMS / OSS)</code>:</strong>
+                        <ul>
+                            <li><strong><code>OMC (Operation and Maintenance Center)</code>:</strong> مركز مراقبة وإدارة الشبكة (<code>OMC-R</code> للـ BSS و <code>OMC-S</code> للـ SSS).</li>
+                        </ul>
+                    </li>
+                    <li><strong>المناطق الجغرافية في الشبكة (<code>Geographic Network Areas</code>):</strong>
+                        <ul>
+                            <li><code>GSM Service Area</code> (المنطقة الكلية).</li>
+                            <li><code>PLMN</code> (شبكة مشغل واحد في بلد).</li>
+                            <li><code>MSC/VLR Service Area</code> (منطقة خدمة MSC واحد).</li>
+                            <li><code>LA (Location Area)</code>: أكبر منطقة يتحرك فيها الموبايل بدون <code>location update</code>. ليها <code>LAI</code>. الـ Paging للمكالمات بيتم هنا.</li>
+                            <li><code>Cell</code>: أصغر منطقة (تغطية BTS واحد). ليها <code>CGI</code>.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بهذا الجزء (مقترحة):</h3>
+                    <ol>
+                        <li>What are the main subsystems of a GSM network? Briefly describe the function of each. (إيه هي الأنظمة الفرعية الرئيسية في شبكة GSM؟ اشرح وظيفتها باختصار).</li>
+                        <li>Differentiate between <code>HLR</code> and <code>VLR</code>. (فرق بين HLR و VLR).</li>
+                        <li>Explain the role of the <code>AUC</code> and <code>EIR</code> in GSM security. (اشرح دور AUC و EIR في أمان GSM).</li>
+                        <li>What is the purpose of using <code>TMSI</code>? (إيه الغرض من استخدام TMSI؟)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة GSM - جزء 3 -->
+        <section id="lecture4" class="lecture-card">
+             <h2>محاضرة GSM (الجزء الثالث: العناصر الرقمية في GSM) (Dr. Hany El-Ghaish)</h2>
+             <div class="content">
+                <p>الجزء ده بيتكلم عن العمليات اللي بتحصل على الإشارة الصوتية (أو البيانات) جوه نظام <code>GSM</code> الرقمي، خصوصًا في الـ <code>Air Interface</code>.</p>
+                <ul>
+                    <li><strong>سلسلة الإرسال في GSM (<code>GSM Transmission Chain</code>):</strong> صوت -> مايك -> <code>Analog signal</code> -> <code>Speech Encoder</code> (A/D + ضغط -> 13 kbps) -> <code>Channel Encoder</code> (تصحيح أخطاء -> 22.8 kbps) -> <code>Interleaver</code> (توزيع الأخطاء) -> <code>Ciphering</code> (تشفير بـ <code>Kc</code>) -> <code>Burst assembling</code> (تجميع في bursts) -> <code>Modulator</code> (<code>GMSK</code>) -> هوا.</li>
+                    <li><strong>سلسلة الاستقبال (<code>GSM Reception Chain</code>):</strong> العمليات العكسية.</li>
+                    <li><strong>ترميز الصوت (<code>Speech Coding</code>):</strong>
+                        <ul>
+                            <li>الأهداف: <code>Low bit rate</code>، جودة مقبولة، تكلفة معقولة.</li>
+                            <li>الفكرة: إرسال معلومات عن الصوت (<code>information about speech</code>).</li>
+                            <li>الخطوات: <code>A/D (PCM)</code> (Filtering, Sampling, Quantizing, Encoding -> 104 kbps) -> <code>Segmentation</code> (بلوكات 20 ms) -> <code>Compression</code> (ضغط 8:1 -> 260 bit/20ms = 13 kbps) باستخدام <code>Predictive Coding</code>.</li>
+                            <li><code>Voice Activity Detection (VAD)</code> + <code>Discontinuous Transmission (DTX)</code>: إرسال <code>Comfort noise</code> و <code>SID</code> بس في فترات الصمت لتوفير الطاقة وتقليل التداخل.</li>
+                        </ul>
+                    </li>
+                     <li><strong>ترميز القناة (<code>Channel Coding</code>):</strong>
+                        <ul>
+                            <li>الهدف: إضافة <code>redundancy</code> لـ <code>Error correction</code> في القناة الهوائية الـ <code>error-prone</code>.</li>
+                            <li>الأنواع المستخدمة: <code>Block code</code> و <code>Convolutional code</code>.</li>
+                             <li>التفاصيل: تقسيم الـ 260 bit حسب الأهمية وعمل coding مختلف -> 456 bit/20ms = 22.8 kbps.</li>
+                        </ul>
+                    </li>
+                     <li><strong>التعشيق (<code>Interleaving</code>):</strong>
+                        <ul>
+                            <li>الهدف: توزيع تأثير أخطاء الـ <code>burst errors</code> عشان الـ <code>decoder</code> يقدر يصلحها.</li>
+                            <li>الأنواع: <code>Block interleaving</code>, <code>Burst interleaving</code> (الأهم: الـ 456 bit بيتقسموا نصين ويتبعتوا في 2 <code>bursts</code> مش ورا بعض).</li>
+                        </ul>
+                    </li>
+                     <li><strong>الأمان (<code>Security</code>):</strong>
+                        <ul>
+                            <li>أنواع الهجمات: <code>Passive</code> (تنصت), <code>Active</code> (انتحال، تغيير بيانات).</li>
+                            <li>مميزات GSM:
+                                <ol>
+                                    <li><strong><code>TMSI</code>:</strong> إخفاء <code>IMSI</code>.</li>
+                                    <li><strong><code>Authentication</code>:</strong> التحقق من هوية المشترك (<code>Ki</code>, <code>RAND</code>, <code>A3</code>, <code>SRES</code>).</li>
+                                    <li><strong><code>IMEI check</code>:</strong> التحقق من الجهاز (<code>EIR</code>).</li>
+                                    <li><strong><code>Ciphering</code> (التشفير):</strong> تشفير المكالمة على الهوا (<code>Kc</code>, <code>FN</code>, <code>A5</code>).</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>التضمين (<code>Modulation</code>):</strong>
+                        <ul>
+                            <li><strong><code>GMSK (Gaussian Minimum Shift Keying)</code>:</strong> النوع المستخدم.</li>
+                            <li>مميزاته: كفاءة <code>bandwidth</code>، استهلاك طاقة قليل، أداء <code>BER</code> كويس، تكلفة قليلة.</li>
+                        </ul>
+                    </li>
+                </ul>
+                 <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بهذا الجزء (مقترحة):</h3>
+                    <ol>
+                        <li>Describe the GSM transmission chain, explaining the purpose of each main block. (اشرح سلسلة الإرسال في GSM ووظيفة كل جزء).</li>
+                        <li>Why is channel coding necessary in GSM? What types of codes are used? (ليه ترميز القناة ضروري في GSM؟ وإيه أنواعه؟)</li>
+                        <li>Explain the concept of interleaving and why it is used in GSM. (اشرح التعشيق وليه بيستخدم في GSM).</li>
+                        <li>List and briefly explain the main security features of GSM. (اذكر واشرح مميزات الأمان في GSM).</li>
+                        <li>What modulation technique is used in GSM and what are its advantages? (إيه تقنية التضمين في GSM ومميزاتها؟)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة GPRS -->
+        <section id="lecture5" class="lecture-card">
+            <h2>المحاضرة الثالثة: GPRS (General Packet Radio Service) (من صور اليوتيوب)</h2>
+            <div class="content">
+                <p>المحاضرة دي بتتكلم عن <code>GPRS</code>، وهي تقنية بتطور شبكة <code>GSM</code> لنقل البيانات بكفاءة أعلى باستخدام <code>Packet Switching</code>.</p>
+                <ul>
+                    <li><strong>نقل البيانات في GSM قبل GPRS:</strong> كان <code>Circuit Switching</code>، بطيء (9.6 kbps) وغير فعال للبيانات الـ <code>bursty</code>.</li>
+                    <li><strong>تطور نقل البيانات:</strong> GSM -> HSCSD -> GPRS -> EDGE.</li>
+                    <li><strong>أنواع الـ Switching:</strong> <code>Circuit Switching</code> (حجز دايرة كاملة), <code>Message Switching</code> (تخزين وإرسال), <code>Packet Switching</code> (تقسيم لـ <code>packets</code>، كل packet بمسار مختلف - المستخدم في GPRS).</li>
+                    <li><strong>GPRS بيعمل إيه؟</strong>
+                        <ul>
+                            <li><code>Packet Switching</code>.</li>
+                            <li><code>Coding schemes</code> جديدة لسرعة أعلى.</li>
+                            <li><code>Multislot capability</code> (استخدام أكتر من <code>timeslot</code>).</li>
+                            <li>النتيجة: سرعات أعلى (تصل لـ 171.2 kbps نظريًا).</li>
+                        </ul>
+                    </li>
+                    <li><strong>استغلال موارد الشبكة:</strong> <code>Resource Sharing</code> (بيستخدم الـ <code>timeslots</code> الفاضية أو غير المستخدمة بكامل طاقتها).</li>
+                    <li><strong>تغيير طريقة الحساب (<code>Billing</code>):</strong> من الحساب بالمدة للحساب بكمية البيانات -> فكرة "<code>Always-on connectivity</code>".</li>
+                    <li><strong>خدمات GPRS:</strong> <code>Point-to-Point (PTP)</code> (<code>CONS</code> أو <code>CLNS</code>), <code>Point-to-Multipoint (PTM)</code> (<code>Multicast</code>, <code>Group Call</code>), خدمات إضافية (Internet, Email...).</li>
+                    <li><strong>جودة الخدمة (<code>Quality of Service - QoS</code>):</strong> مستويات مختلفة حسب <code>Priority</code>, <code>Rate</code>, <code>Reliability</code>, <code>Delay</code>.</li>
+                    <li><strong>فئات أجهزة الموبايل (<code>Mobile Stations Classes</code>):</strong>
+                        <ul>
+                            <li><strong>Class A:</strong> صوت وبيانات في نفس الوقت.</li>
+                            <li><strong>Class B:</strong> يا صوت يا بيانات (الأكثر انتشارًا).</li>
+                            <li><strong>Class C:</strong> يا صوت يا بيانات (لازم تختار).</li>
+                        </ul>
+                    </li>
+                     <li><strong>عناصر الشبكة الجديدة في GPRS:</strong>
+                        <ol>
+                            <li><strong><code>PCU (Packet Control Unit)</code>:</strong> في الـ BSS لإدارة موارد الراديو لـ GPRS.</li>
+                            <li><strong><code>SGSN (Serving GPRS Support Node)</code>:</strong> زي الـ MSC للبيانات (<code>Mobility/Session Management</code>, <code>Billing</code>, <code>Security</code>).</li>
+                            <li><strong><code>GGSN (Gateway GPRS Support Node)</code>:</strong> البوابة للشبكات الخارجية (<code>PDN</code>) زي الإنترنت (<code>Routing</code>, <code>Address mapping</code>, <code>Firewall</code>).</li>
+                        </ol>
+                    </li>
+                    <li><strong>الـ Interfaces الجديدة:</strong> Gb, Gn, Gp, Gi, Gs, Gr, Gc.</li>
+                    <li><strong><code>PDP Context (Packet Data Protocol Context)</code>:</strong> جلسة البيانات اللي بتخزن معلومات المستخدم (IP, GGSN address, QoS).</li>
+                    <li><strong><code>Intra/Inter-PLMN Backbone</code>:</strong> شبكة ربط الـ <code>GSNs</code> ببعض.</li>
+                    <li><strong>وظائف GPRS الأساسية:</strong> تشمل <code>Network access</code>, <code>Registration</code>, <code>Authentication</code>, <code>Packet transmission</code>, <code>Mobility Management</code>, <code>Connection Management</code>.</li>
+                    <li><strong>إدارة الحركة (<code>Mobility Management States</code>):</strong>
+                        <ul>
+                            <li><strong><code>Idle</code>:</strong> غير معروف كـ GPRS user.</li>
+                            <li><strong><code>Ready</code>:</strong> متصل ومكانه معروف (<code>Cell level</code>).</li>
+                            <li><strong><code>Standby</code>:</strong> متصل ومكانه معروف (<code>Routing Area level</code>)، يحتاج <code>paging</code> لاستقبال البيانات.</li>
+                        </ul>
+                    </li>
+                    <li><strong>إدارة الاتصال (<code>Connection Management</code>):</strong> <code>GPRS Attach</code> (تسجيل دخول GPRS) و <code>GPRS Detach</code> (تسجيل خروج).</li>
+                </ul>
+                <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بالمحاضرة الثالثة (GPRS) (مقترحة):</h3>
+                     <ol>
+                        <li>What is the main difference between <code>circuit switching</code> and <code>packet switching</code>? (إيه الفرق بين تحويل الدوائر والحزم؟)</li>
+                        <li>What are the main new network elements introduced in GPRS compared to GSM? Briefly describe their functions. (إيه عناصر الشبكة الجديدة في GPRS ووظائفها؟)</li>
+                        <li>What is a <code>PDP Context</code>? (إيه هو الـ PDP Context؟)</li>
+                        <li>Explain the three <code>mobility management states</code> in GPRS (<code>Idle</code>, <code>Ready</code>, <code>Standby</code>). (اشرح حالات إدارة الحركة في GPRS).</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+         <!-- محاضرة Signaling -->
+        <section id="lecture6" class="lecture-card">
+            <h2>المحاضرة الرابعة: Signaling (الإشارات في GSM/GPRS) (من صور اليوتيوب)</h2>
+            <div class="content">
+                <p>المحاضرة دي بتفصّل في موضوع الـ <code>Signaling</code>، وهو تبادل المعلومات بين مكونات الشبكة لتنفيذ العمليات.</p>
+                <ul>
+                    <li><strong>إيه هو الـ Signaling؟</strong> تبادل معلومات بين عناصر الشبكة لدعم التطبيقات (إجراء مكالمة، تحديث مكان...).</li>
+                    <li><strong>هويات الشبكة (<code>Network Identities</code>):</strong>
+                        <ul>
+                            <li><strong><code>LAI (Location Area Identification)</code>:</strong> يحدد <code>Location Area</code>. الـ <code>Location Update</code> بيحصل عند التنقل بين <code>LA</code>. الـ <code>Paging</code> للمكالمات بيتم هنا.</li>
+                            <li><strong><code>RAI (Routing Area Identification)</code>:</strong> يحدد <code>Routing Area</code> (خاص بـ GPRS، جزء من أو يساوي <code>LA</code>). الـ <code>Routing Area Update</code> بيحصل هنا. الـ <code>Paging</code> للبيانات بيتم هنا.</li>
+                            <li><strong><code>CGI (Cell Global Identification)</code>:</strong> يحدد خلية (<code>Cell</code>) بدقة. يستخدم في حالة <code>Ready</code>/<code>Active</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>عناوين IP (<code>IP Addresses</code>):</strong> الـ <code>GSNs</code> ليها IP للتواصل. المستخدم بياخد IP (<code>static</code>/<code>dynamic</code>) عند فتح <code>PDP context</code>.</li>
+                     <li><strong>أرقام GSN (<code>GSN Numbers</code>):</strong> أرقام زي التليفونات للتواصل مع عناصر GSM التقليدية (مثل HLR) باستخدام <code>SS7</code>.</li>
+                    <li><strong>اسم نقطة الوصول (<code>APN - Access Point Name</code>):</strong> اسم منطقي بيستخدمه الموبايل لتحديد الشبكة الخارجية (<code>PDN</code>) اللي عايز يتصل بيها عن طريق الـ <code>GGSN</code>.</li>
+                    <li><strong>عنوان بروتوكول بيانات الحزمة (<code>PDP Address</code>):</strong> عنوان المستخدم في الشبكة الخارجية (غالبًا IP).</li>
+                    <li><strong>الواجهة الهوائية (<code>Air Interface</code>) - تفاصيل أكتر:</strong>
+                        <ul>
+                            <li>نطاقات التردد (<code>Frequency Bands</code>): GSM 900/1800/1900 (<code>uplink</code>/<code>downlink</code>).</li>
+                            <li>القنوات الفيزيائية (<code>Physical Channels</code>): التردد يتقسم لـ 8 <code>Timeslots</code> (<code>TDMA</code>). الـ <code>Timeslot</code> هو القناة الفيزيائية.</li>
+                            <li>أنظمة الترميز الجديدة (<code>New Coding Schemes</code>) في GPRS:
+                                <ul>
+                                    <li><code>CS-1</code>: أبطأ، أقوى حماية (9.05 kbps).</li>
+                                    <li><code>CS-2</code>: أسرع، حماية أقل (13.4 kbps).</li>
+                                    <li><code>CS-3</code>: أسرع، حماية أقل (15.6 kbps).</li>
+                                    <li><code>CS-4</code>: الأسرع، بدون حماية تقريبًا (21.4 kbps).</li>
+                                    <li>الاختيار ديناميكي حسب جودة القناة.</li>
+                                </ul>
+                            </li>
+                            <li>القنوات المنطقية (<code>Logical Channels</code>): تقسيم القنوات الفيزيائية حسب نوع المعلومة:
+                                <ul>
+                                    <li><strong><code>Traffic Channels (TCH)</code>:</strong> بيانات المستخدم (صوت/بيانات).</li>
+                                    <li><strong><code>Control Channels (CCH)</code>:</strong> معلومات التحكم (<code>signaling</code>).
+                                        <ul>
+                                            <li><strong><code>Broadcast (BCCH)</code> (Downlink):</strong> <code>FCCH</code>, <code>SCH</code>, <code>BCCH</code> (معلومات عامة), <code>PBCCH</code> (معلومات GPRS).</li>
+                                            <li><strong><code>Common (CCCH)</code>:</strong> لبدء الاتصال أو Paging.
+                                                <ul>
+                                                    <li>Downlink: <code>PCH</code>/<code>PNCH</code> (Paging), <code>AGCH</code>/<code>PAGCH</code> (Access Grant).</li>
+                                                    <li>Uplink: <code>RACH</code>/<code>PRACH</code> (Random Access).</li>
+                                                </ul>
+                                            </li>
+                                            <li><strong><code>Dedicated (DCCH)</code>:</strong> لموبايل واحد. <code>SDCCH</code> (Signaling قبل الـ TCH), <code>SACCH</code> (معلومات بطيئة مرتبطة بـ TCH/SDCCH), <code>FACCH</code> (معلومات سريعة "تسرق" مكان البيانات), <code>PACCH</code> (زي SACCH/FACCH للـ GPRS), <code>PTCCH</code> (Timing Advance للـ GPRS).</li>
+                                            <li><code>CBCH</code> (رسائل بث للخلية).</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                 <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بالمحاضرة الرابعة (Signaling) (مقترحة):</h3>
+                    <ol>
+                        <li>What is Signaling in the context of mobile networks? (إيه هو الـ Signaling؟)</li>
+                        <li>Explain the difference between <code>LAI</code>, <code>RAI</code>, and <code>CGI</code>. (اشرح الفرق بين LAI, RAI, و CGI).</li>
+                        <li>What is the purpose of using different <code>Coding Schemes</code> (CS1-CS4) in GPRS? (إيه غرض استخدام أنظمة ترميز مختلفة في GPRS؟)</li>
+                        <li>Differentiate between <code>Traffic Channels</code> and <code>Control Channels</code>. Give examples of common control channels. (فرق بين قنوات المرور والتحكم وادي أمثلة).</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة WLAN - جزء 1 -->
+        <section id="lecture7" class="lecture-card">
+            <h2>المحاضرة الخامسة: Wireless LAN (Dr. Moustafa Alzantot) - أساسيات وشبكات لاسلكية (WiFi) و CDMA</h2>
+             <div class="content">
+                <p>المحاضرة دي بتبدأ تتكلم عن <code>Wireless LAN (WLAN)</code>، وأشهر مثال ليها هو الـ <code>Wi-Fi</code>. بتعتمد على كتاب Kurose/Ross.</p>
+                <ul>
+                    <li><strong>مقدمة:</strong> الأجهزة اللاسلكية أكتر من السلكية. تحديات: <code>Wireless</code> (صعوبة الاتصال الهوائي)، <code>Mobility</code> (حركة المستخدم).</li>
+                    <li><strong>عناصر الشبكة اللاسلكية:</strong>
+                        <ul>
+                            <li><code>Wireless Hosts</code> (الأجهزة).</li>
+                            <li><code>Base Station</code> (زي <code>Cell towers</code> أو <code>Access Points (APs)</code>).</li>
+                            <li><code>Wireless Link</code> (الوصلة الهوائية، تستخدم <code>multiple access</code>).</li>
+                            <li><code>Network Infrastructure</code> (الشبكة السلكية).</li>
+                        </ul>
+                    </li>
+                    <li><strong>أوضاع التشغيل (<code>Modes</code>):</strong>
+                        <ul>
+                            <li><strong><code>Infrastructure Mode</code>:</strong> الأجهزة بتتصل بـ <code>AP</code> اللي بيوصلها بالشبكة السلكية. فيه <code>Handoff</code>.</li>
+                            <li><strong><code>Ad hoc Mode</code>:</strong> الأجهزة بتتصل ببعضها مباشرة بدون <code>AP</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>تصنيف الشبكات اللاسلكية (<code>Taxonomy</code>):</strong> حسب <code>Single/Multiple hops</code> و <code>Infrastructure/No infrastructure</code>.
+                        <ul>
+                            <li>Single hop, infrastructure: Wi-Fi, Cellular, WiMAX.</li>
+                            <li>Multiple hops, infrastructure: Mesh.</li>
+                            <li>Single hop, no infrastructure: Bluetooth, Ad hoc بسيط.</li>
+                            <li>Multiple hops, no infrastructure: MANET, VANET.</li>
+                        </ul>
+                    </li>
+                    <li><strong>خصائص الوصلة اللاسلكية (<code>Wireless Link Characteristics</code>):</strong>
+                        <ol>
+                            <li><code>Decreased signal strength</code> (<code>path loss</code>).</li>
+                            <li><code>Interference</code> من مصادر تانية (زي 2.4 GHz).</li>
+                            <li><code>Multipath propagation</code> (انعكاسات تسبب <code>fading</code>).</li>
+                        </ol>
+                    </li>
+                    <li><strong>نسبة الإشارة إلى الضوضاء (<code>SNR - Signal-to-Noise Ratio</code>):</strong> مقياس قوة الإشارة مقارنة بالضوضاء. <code>SNR</code> أعلى -> أسهل استخلاص الإشارة.</li>
+                    <li><strong>العلاقة بين <code>SNR</code> ومعدل خطأ البت (<code>BER - Bit Error Rate</code>):</strong>
+                        <ul>
+                            <li><code>Tradeoff</code>: زيادة الـ <code>Power</code> -> زيادة <code>SNR</code> -> تقليل <code>BER</code>.</li>
+                            <li>عند <code>SNR</code> ثابتة، نختار <code>Physical layer</code> (<code>modulation</code>/<code>rate</code>) يحقق <code>BER</code> مقبولة وأعلى <code>throughput</code>.</li>
+                            <li>الأنظمة الحديثة بتعمل <code>dynamically adapt</code> للـ <code>Physical layer</code> حسب الـ <code>SNR</code> المتغيرة.</li>
+                        </ul>
+                    </li>
+                    <li><strong>مشاكل الشبكات اللاسلكية (غير <code>Multiple Access</code>):</strong>
+                        <ul>
+                            <li><strong><code>Hidden Terminal Problem</code>:</strong> جهازين A و C عايزين يكلموا B، لكن مش سامعين بعض. لو بعتوا في نفس الوقت يحصل <code>collision</code> عند B وهما مش هيعرفوا.</li>
+                            <li><strong><code>Signal Attenuation</code>:</strong> ممكن تسبب نفس مشكلة الـ <code>Hidden Terminal</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>CDMA (Code Division Multiple Access)</code>:</strong>
+                        <ul>
+                            <li>تقنية <code>multiple access</code> مختلفة.</li>
+                            <li>كل مستخدم ليه <code>code</code> فريد.</li>
+                            <li>الكل بيستخدم نفس التردد والوقت.</li>
+                            <li>المرسل بيضرب الداتا في الكود (<code>spreading</code>).</li>
+                            <li>المستقبل بيضرب الإشارة المستلمة في نفس الكود لاستخلاص الداتا (<code>despreading</code>).</li>
+                            <li>لو الأكواد متعامدة (<code>orthogonal</code>)، التداخل بيكون قليل.</li>
+                             <li>مثال: إرسال bit '1' أو '-1' بتحويله لسلسلة الكود أو عكسها. عند الاستقبال، الضرب الداخلي (<code>inner product</code>) بين الإشارة المستلمة وكود المستخدم المطلوب بيطلع الداتا الأصلية.</li>
+                        </ul>
+                    </li>
+                </ul>
+                 <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بالمحاضرة الخامسة:</h3>
+                    <ol>
+                        <li>What is the difference between <code>wireless</code> and <code>mobility</code>? (إيه الفرق بين اللاسلكي والحركية؟)</li>
+                        <li>What is the difference between <code>infrastructure mode</code> and <code>ad-hoc mode</code> in wireless networks? (إيه الفرق بين وضع البنية التحتية والأد-هوك؟)</li>
+                        <li>What is the meaning of <code>multipath fading</code>? How can we solve this problem? (إيه معنى خفوت المسارات المتعددة وحلها؟)</li>
+                        <li>What are the differences among the used techniques (<code>FDM</code>, <code>TDM</code>, <code>FDMA</code>, <code>TDMA</code>, <code>CDMA</code>) in wireless communication? (إيه الفروقات بين التقنيات؟ - تم شرح CDMA هنا).</li>
+                        <li>(سؤال إضافي) Explain the <code>Hidden Terminal Problem</code> in wireless networks. (اشرح مشكلة المحطة المخفية).</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- محاضرة WLAN - جزء 2 -->
+        <section id="lecture8" class="lecture-card">
+            <h2>المحاضرة السادسة: Wireless LAN (Continue) (Dr. Moustafa Alzantot) - تكملة WiFi ومعاييرها وبروتوكولاتها</h2>
+             <div class="content">
+                <p>المحاضرة دي بتكمل كلام عن <code>Wireless LAN</code> وبتركز على معايير <code>IEEE 802.11</code> (الـ Wi-Fi) وبروتوكول <code>CSMA/CA</code>.</p>
+                <ul>
+                    <li><strong>مراجعة سريعة:</strong> <code>TDMA</code>, <code>FDMA</code>, <code>CDMA</code>, ومراجعة <code>Hidden Terminal Problem</code>.</li>
+                    <li><strong>معايير <code>IEEE 802.11</code> (<code>Wi-Fi Standards</code>):</strong>
+                        <ul>
+                            <li><strong><code>802.11b</code>:</strong> 2.4 GHz, 11 Mbps, <code>DSSS</code>.</li>
+                            <li><strong><code>802.11a</code>:</strong> 5 GHz, 54 Mbps, <code>OFDM</code>. (مدى أقصر).</li>
+                            <li><strong><code>802.11g</code>:</strong> 2.4 GHz, 54 Mbps, <code>OFDM</code> (متوافق مع b).</li>
+                            <li><strong><code>802.11n</code>:</strong> 2.4/5 GHz, 200+ Mbps, <code>MIMO</code>.</li>
+                            <li>كلهم بيستخدموا <code>CSMA/CA</code> وممكن يشتغلوا <code>Infrastructure</code> أو <code>Ad-hoc</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>تخطيط قنوات الواي فاي (<code>WIFI Channel Planning</code>) (لـ 2.4 GHz):</strong>
+                        <ul>
+                            <li>النطاق مقسم لـ 11-14 قناة (حسب البلد).</li>
+                            <li>802.11b بيحتاج 22 MHz عرض قناة.</li>
+                            <li>في أمريكا (11 قناة)، فيه 3 قنوات بس غير متداخلين (<code>non-overlapping</code>): <strong>1, 6, 11</strong>.</li>
+                            <li>مهم عشان نقلل التداخل بين الـ <code>APs</code> المتجاورة.</li>
+                        </ul>
+                    </li>
+                    <li><strong>هيكل شبكة 802.11 (<code>802.11 LAN Architecture</code>):</strong>
+                        <ul>
+                            <li><code>AP (Access Point)</code>: الـ Base Station.</li>
+                            <li><code>BSS (Basic Service Set)</code>: مجموعة أجهزة متصلة بنفس الـ AP (خلية واي فاي).</li>
+                            <li><code>ESS (Extended Service Set)</code>: مجموعة BSS متوصلين ببعض (نفس الـ <code>SSID</code>)، يسمح بالـ <code>roaming</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>القنوات والارتباط (<code>Channels and Association</code>):</strong>
+                        <ol>
+                            <li><strong><code>Scanning</code> (المسح):</strong>
+                                <ul>
+                                    <li><code>Passive</code>: استقبال <code>Beacon frames</code> (فيها <code>SSID</code>, <code>MAC address</code>).</li>
+                                    <li><code>Active</code>: إرسال <code>Probe Request</code> وانتظار <code>Probe Response</code>.</li>
+                                </ul>
+                            </li>
+                            <li><strong><code>Selection</code> (الاختيار):</strong> اختيار AP (غالبًا الأقوى إشارة).</li>
+                            <li><strong><code>Association</code> (الارتباط):</strong> إرسال <code>Association Request</code> واستقبال <code>Association Response</code>.</li>
+                            <li><strong><code>Authentication</code> (التوثيق):</strong> (مثلًا باسورد <code>WPA2</code>).</li>
+                            <li><strong><code>DHCP</code>:</strong> طلب <code>IP address</code>.</li>
+                        </ol>
+                    </li>
+                     <li><strong>بروتوكول الوصول للوسط (<code>MAC Protocol</code>): <code>CSMA/CA</code> (<code>Collision Avoidance</code>)</strong>
+                        <ul>
+                            <li><strong>ليه مش <code>CSMA/CD</code> (<code>Collision Detection</code>)؟</strong> صعب اكتشاف التصادم (الإشارة المستقبلة أضعف من المرسلة) + مشكلة <code>Hidden Terminal</code>.</li>
+                            <li><strong>آلية <code>DCF</code> الأساسية:</strong>
+                                <ol>
+                                    <li>اسمع قبل ما تتكلم (<code>Carrier Sense</code>). لو القناة فاضية لمدة <code>DIFS</code>، ابعت.</li>
+                                    <li>لو مشغولة، استنى (<code>defer</code>).</li>
+                                    <li>لو فضيت بعد ما كانت مشغولة: اختار <code>random backoff</code> من <code>contention window</code>.</li>
+                                    <li>شغل عداد الـ <code>Backoff</code> (بينقص لو القناة فاضية، بيقف لو بقت مشغولة).</li>
+                                    <li>لما العداد يوصل صفر: ابعت الـ <code>frame</code>.</li>
+                                    <li>استنى <code>ACK</code> خلال فترة <code>SIFS</code>.</li>
+                                    <li>لو وصلت: تمام.</li>
+                                    <li>لو موصلتش (<code>Timeout</code> -> غالبًا <code>collision</code>): زود الـ <code>backoff window</code> (<code>exponential backoff</code>) وعيد المحاولة.</li>
+                                </ol>
+                            </li>
+                            <li><strong>ليه الـ <code>ACK</code> ضروري؟</strong> عشان يأكد وصول الـ <code>frame</code> رغم احتمال وجود <code>Hidden Terminal</code>.</li>
+                             <li><strong>تجنب التصادم أكتر (<code>RTS/CTS - Request to Send / Clear to Send</code>):</strong>
+                                <ul>
+                                    <li>للحجز قبل إرسال <code>frames</code> كبيرة.</li>
+                                    <li>المرسل يبعت <code>RTS</code> (باستخدام CSMA/CA).</li>
+                                    <li>المستقبل يرد بـ <code>CTS</code>.</li>
+                                    <li>المرسل يبعت الداتا.</li>
+                                    <li>أي حد يسمع الـ <code>CTS</code> يسكت (يحل <code>Hidden Terminal</code>).</li>
+                                    <li>أي حد يسمع الـ <code>RTS</code> بس، ممكن ميسكتش (يساعد في <code>Exposed Terminal</code>).</li>
+                                </ul>
+                            </li>
+                             <li><strong>مشكلة المحطة المكشوفة (<code>Exposed Terminal Problem</code>):</strong> جهاز C يسمع A بيبعت لـ B فيستنى، مع إنه لو بعت لـ D مش هيحصل تداخل. <code>RTS/CTS</code> ممكن تساعد في حلها جزئيًا.</li>
+                        </ul>
+                    </li>
+                </ul>
+                 <div class="exam-questions">
+                    <h3>أسئلة الامتحانات المتعلقة بالمحاضرة السادسة:</h3>
+                    <ol>
+                        <li>What is the difference between <code>infrastructure mode</code> and <code>ad-hoc mode</code> in wireless networks? (إيه الفرق بين وضع البنية التحتية والأد-هوك؟)</li>
+                        <li>What is the difference between CSMA <code>1-persistent</code> and <code>non-persistent</code>? (إيه الفرق بين أنواع CSMA؟ - مراجعة).</li>
+                        <li>What is the meaning of <code>Carrier Sense Multiple Access</code>? (إيه معنى CSMA؟ - مراجعة).</li>
+                        <li>(سؤال إضافي) Explain why <code>CSMA/CD</code> is not suitable for wireless networks and how <code>CSMA/CA</code> works instead. (ليه CSMA/CD مش مناسب للوايرلس وإزاي CSMA/CA بيشتغل؟)</li>
+                        <li>(سؤال إضافي) What is the purpose of the <code>RTS/CTS</code> mechanism in IEEE 802.11? How does it help solve the <code>Hidden Terminal Problem</code>? (إيه غرض RTS/CTS وإزاي بيحل مشكلة المحطة المخفية؟)</li>
+                        <li>(سؤال إضافي) Why is channel planning (e.g., using channels 1, 6, 11) important in Wi-Fi deployments? (ليه تخطيط القنوات مهم في الواي فاي؟)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- /container -->
+
+    <footer>
+        <p>تم تجميع وتلخيص المحاضرات بواسطة الذكاء الاصطناعي. بالتوفيق في الامتحان!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+// --- Smooth Scrolling for Navigation Links ---
+const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default jump
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // Calculate offset dynamically to account for sticky header
+            const headerOffset = document.querySelector('header').offsetHeight + 10; // Get header height + small buffer
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+
+            // Optional: Briefly highlight the target section
+            targetElement.style.transition = 'background-color 0.5s ease-in-out';
+            targetElement.style.backgroundColor = 'rgba(0, 123, 255, 0.1)'; // Light blue flash
+            setTimeout(() => {
+                targetElement.style.backgroundColor = ''; // Reset background
+            }, 1000); // Remove highlight after 1 second
+        }
+    });
+});
+
+// --- Fade-in effect for Lecture Cards on Scroll ---
+const lectureCards = document.querySelectorAll('.lecture-card');
+
+const observerOptions = {
+    root: null, // relative to the viewport
+    rootMargin: '0px',
+    threshold: 0.1 // Trigger when 10% of the element is visible
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Optional: Stop observing the element once it's visible
+            // observer.unobserve(entry.target);
+        }
+         // Optional: Remove 'visible' class if element scrolls out of view
+         // else {
+         //     entry.target.classList.remove('visible');
+         // }
+    });
+};
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+lectureCards.forEach(card => {
+    observer.observe(card);
+});
+
+});
+    </script>
+</body>
+</html>
