@@ -1,14 +1,14 @@
-# Machine Learning Projects Collection
+# DataCamp-projects Collection
 
 ## Overview
-This repository is a collection of machine learning projects completed through [DataCamp](https://www.datacamp.com/) and other platforms or personal initiatives. It showcases a variety of ML techniques, including data preprocessing, model training, and evaluation, applied to diverse problem domains like [e.g., "classification, regression, and clustering"]. The projects demonstrate proficiency in Python and libraries such as `pandas`, `scikit-learn`, and `matplotlib`, with goals ranging from predictive modeling to exploratory data analysis.
+This repository is a collection of DataCamp-projects completed through [DataCamp](https://www.datacamp.com/) and other platforms or personal initiatives. It showcases a variety of ML techniques, including data preprocessing, model training, and evaluation, applied to diverse problem domains like [e.g., "classification, regression, and clustering"]. The projects demonstrate proficiency in Python and libraries such as `pandas`, `scikit-learn`, and `matplotlib`, with goals ranging from predictive modeling to exploratory data analysis.
 
 ## Table of Contents
 - [Overview](#overview)
 - [Projects](#projects)
 
 ## Projects
-This collection includes the following machine learning projects:
+This collection includes the following projects:
 
 - 1  **[Predicting Credit Card Approvals]**  
    - **Source**: [e.g., "DataCamp - Machine Learning with Python"]  
